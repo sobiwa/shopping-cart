@@ -2,6 +2,8 @@ import './App.css';
 import Root from './routes/Root'
 import Home from './routes/Home';
 import Shop from './routes/Shop';
+import Error from './routes/Error';
+import Item from './routes/Item';
 
 import {
   createBrowserRouter,
@@ -12,6 +14,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Root />,
+    errorElement: <Error />,
     children: [
       {
         index: true,
@@ -20,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: '/shop',
         element: <Shop />
+      },
+      {
+        path:'items/:itemId',
+        element: <Item />
       }
     ]
   }

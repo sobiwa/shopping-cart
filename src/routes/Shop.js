@@ -1,5 +1,14 @@
+import Card from '../components/Card';
+import mallows from '../mallows';
+
 export default function Shop() {
-  return(
-    <h1>SHOP</h1>
-  )
+  return (
+    <>
+      <div className="shop--items-container">
+        {mallows.map((mallow) => (
+          <Card key={mallow.name} name={mallow.name} image={mallow.image} />
+        ))}
+      </div>
+    </>
+  );
 }

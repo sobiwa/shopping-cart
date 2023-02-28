@@ -4,7 +4,7 @@ import fifi from '../assets/premium/fifi.png';
 import lola from '../assets/premium/lola.png';
 import wyatt from '../assets/premium/wyatt.png';
 import wanda from '../assets/premium/wanda.png';
-import steele from '../assets/premium/Steele-1.png';
+import steele from '../assets/premium/steele.png';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -14,21 +14,21 @@ export default function Home() {
       <div className="home--squish-container">
         <div className="home--row1">
           <div className="home--image">
-            <img src={wanda} />
+            <img src={wanda} alt='lovely wanda'/>
           </div>
           <div className="home--image">
-            <img src={steele} />
+            <img src={steele} alt='Steele'/>
           </div>
         </div>
         <div className="home--row2">
           <div className="home--image">
-            <img src={fifi} />
+            <img src={fifi} alt='Fifi'/>
           </div>
           <div className="home--image">
-            <img src={wyatt} />
+            <img src={wyatt} alt='Wyatt'/>
           </div>
           <div className="home--image">
-            <img src={lola} />
+            <img src={lola} alt='lola'/>
           </div>
         </div>
       </div>
