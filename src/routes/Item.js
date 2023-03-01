@@ -13,7 +13,7 @@ export default function Item() {
 
   const [imageContainerSize, setImageContainerSize] = useState(null);
   const [imgRoll, setImgRoll] = useState(0);
-  const [hover, setHover] = useState(true);
+  const [hover, setHover] = useState(false);
   const [nameColor] = useState(randomColor());
 
   const imageSelectorTracker = useRef(null);
@@ -103,14 +103,16 @@ export default function Item() {
               }}
               className="item--image-selector"
             >
-              {mallow.image.map((pic) => (
+              {mallow.image.map((pic, index) => (
                 <img
                   src={pic}
                   alt={mallow.name}
                   style={{
                     width: smallImgSize,
-                    height: smallImgSize,
+                    maxHeight: '100%',
+                    opacity: imgRoll / -100 === index ? 1 : 0.5
                   }}
+                  onClick={() => setImgRoll(index * -100)}
                 />
               ))}
             </div>
@@ -140,6 +142,22 @@ export default function Item() {
           {mallow.intro && (
             <p className="item--text item--intro">{mallow.intro}</p>
           )}
+          {mallow.size && (
+            <div className="item--size">
+              <p>Size</p>
+              <div>{mallow.size.toString().length < 3 ? `${mallow.size}"` : `${mallow.size}`}</div>
+            </div>
+          )}
+          <div className='item--price-container'>
+            {mallow.stock > 0 ? <div className='item--in-stock'>In stock</div> : <div className='item--out-of-stock'>Out of stock</div>}
+            <div className='item--price'>{`$${mallow.price}`}</div>
+            {mallow.stock > 0 && (
+              <div className='item--acquisition'>
+                
+
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

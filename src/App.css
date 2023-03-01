@@ -22,6 +22,7 @@
   --green: rgb(149 231 51 / 50%);
   --orange: rgb(255 163 0 / 50%);
   --pink: rgb(255 50 172 / 33%);
+  --button-color: rgb(8 204 218);
 
   --home-mallow: min(250px, 40vw);
 }
@@ -32,8 +33,6 @@ html {
 
 body {
   font-family: 'comfortaa';
-  font-size: 50px;
-  font-weight: 800;
   min-height: 100vh;
 }
 
@@ -88,6 +87,25 @@ nav {
   border: none;
   background-color: transparent;
   transition: 0.3s;
+  position: relative;
+}
+
+.header--cart-count {
+  font-family: 'comfortaa';
+  position: absolute;
+  background-color: var(--button-color);
+  color: white;
+  font-size: 0.6rem;
+  height: 1rem;
+  width: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  top: -0.3rem;
+  right: -0.25rem;
+  line-height: 100%;
+  vertical-align: center;
 }
 
 .header--cart-button:hover {
@@ -100,6 +118,7 @@ nav {
   width: min-content;
   transition: 0.3s;
   translate: 0 25px;
+  cursor: pointer;
 }
 
 .logo:hover {
@@ -118,7 +137,6 @@ nav {
 main {
   flex: 1 1 auto;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
 }
 
@@ -227,6 +245,7 @@ main {
 }
 
 .shop--card {
+  font-weight: 500;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -306,21 +325,22 @@ main {
 }
 
 .item--main-info-part div:first-child {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: rgba(29, 31, 40, .69);
 }
 
 .item--text {
   font-size: 0.9rem;
-  font-weight: 6 00;
+  font-weight: 500;
 }
 
 .item--images {
+  margin-top: 50px;
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .item--image-container {
@@ -383,5 +403,37 @@ main {
   display: flex;
   justify-content: center;
   overflow: hidden;
+}
+
+.item--image-selector img {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.item--size p {
+  margin: 0;
+}
+
+.item--size div {
+  width: max-content;
+  white-space: pre-wrap;
+  box-sizing: border-box;
+  padding: 6px 16px;
+  border: 1px solid var(--button-color);
+  margin: 10px 0;
+}
+
+.item--price-container div:first-child {
+  font-size: 0.9rem;
+  margin: 0 6px;
+}
+
+.item--out-of-stock {
+  color: #B50808;
+}
+
+.item--price {
+  line-height: 100%;
+  font-size: 3rem;
 }
 

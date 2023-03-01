@@ -37,6 +37,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [wyatt, wyatt2],
+    stock: 5,
   },
   {
     name: 'Wanda',
@@ -47,6 +48,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [wanda, wanda2],
+    stock: 5,
   },
   {
     name: 'Steele',
@@ -57,6 +59,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [steele, steele2],
+    stock: 5,
   },
   {
     name: 'Lola',
@@ -67,6 +70,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [lola, lola2],
+    stock: 5,
   },
   {
     name: 'Fifi',
@@ -77,6 +81,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [fifi, fifi2],
+    stock: 5,
   },
   {
     name: 'Lamont',
@@ -87,6 +92,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [lamont, lamont2],
+    stock: 5,
   },
   {
     name: 'Avery',
@@ -97,6 +103,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [avery],
+    stock: 5,
   },
   {
     name: 'Aldea',
@@ -107,6 +114,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [aldea],
+    stock: 5,
   },
   {
     name: 'Barb',
@@ -117,6 +125,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [barb, barb2],
+    stock: 5,
   },
   {
     name: 'Conradina',
@@ -127,6 +136,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [conradina, conradina2],
+    stock: 5,
   },
   {
     name: 'Elton',
@@ -134,9 +144,10 @@ const data = [
     birth: new Date ('11-12-2018'),
     description: 'Peach Monkey',
     intro: 'Elton is always up to something! Whether he’s tinkering with a watch, a truck or a toy, he’s fascinated by the way things work!',
-    size: 'Combo Pack - includes: (1) 8-Inch, (1) 5-Inch, (1) 3.5-Inch',
+    size: `Combo Pack - includes: \n(1) 8-Inch, \n(1) 5-Inch, \n(1) 3.5-Inch`,
     price: 19.99,
     image: [elton],
+    stock: 5,
   },
   {
     name: 'Lake',
@@ -147,6 +158,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [lake],
+    stock: 5,
   },
   {
     name: 'Lorenzo',
@@ -157,6 +169,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [lorenzo, lorenzo2],
+    stock: 5,
   },
   {
     name: 'Renard',
@@ -167,6 +180,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [renard],
+    stock: 5,
   },
   {
     name: 'Sigzby',
@@ -177,6 +191,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [sigzby],
+    stock: 5,
   },
   {
     name: 'Terell',
@@ -187,6 +202,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [terell],
+    stock: 5,
   },
   {
     name: 'Winston',
@@ -197,6 +213,7 @@ const data = [
     size: 12,
     price: 19.99,
     image: [winston, winston2],
+    stock: 5,
   },
   {
     name: 'Lalinda',
@@ -206,7 +223,8 @@ const data = [
     intro: 'Have you heard of Lalinda? This ‘Mallow is taking the music industry by storm with her deep vocals and fun guitar riffs. You’ll catch her strutting down every red carpet this year and headlining all the major music events. Reach out to Lalinda on social media! She loves to hear from her fans.',
     size: 12,
     price: 19.99,
-    image: [lalinda]
+    image: [lalinda],
+    stock: 5,
   },
 ]
 
