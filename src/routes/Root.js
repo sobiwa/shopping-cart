@@ -26,7 +26,7 @@ export default function Root() {
         </nav>
       </header>
       <main>
-        <Outlet context={[inventory, setInventory, cart, setCart]} />
+        <Outlet context={{inventory, setInventory, cart, setCart}} />
       </main>
     </>
   );

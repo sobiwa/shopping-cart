@@ -303,6 +303,7 @@ main {
   color: rgb(29,31,40);
   padding: 20px;
   padding-top: 5vw;
+  padding: 5vw 20px 60px 20px;
 }
 
 .item-page--wrapper {
@@ -419,7 +420,7 @@ main {
   white-space: pre-wrap;
   box-sizing: border-box;
   padding: 6px 16px;
-  border: 1px solid var(--button-color);
+  border: 1px solid rgba(8, 204, 218, 0.371);
   margin: 10px 0;
 }
 
@@ -437,3 +438,95 @@ main {
   font-size: 3rem;
 }
 
+.item--acquisition {
+  margin: 30px 0;
+}
+
+.item--qty {
+  position: relative;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgb(233, 233, 233);
+  width: max-content;
+  border-radius: 5px;
+}
+
+.item--qty input[type='number'] {
+  box-sizing: border-box;
+  margin: 0;
+  appearance: none;
+  height: 100%;
+  border: none;
+  width: 30px;
+  text-align: center;
+  color: #777
+}
+
+/* only working way I could find of removing arrows */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.qty-error {
+  transition: 0.5s;
+  position: absolute;
+  bottom: -100%;
+  font-size: 0.8rem;
+  color: #B50808;
+  font-weight: 600;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.item--qty button {
+  box-sizing: border-box;
+  width: 25px;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  height: 100%;
+  color: #777;
+  cursor: pointer;
+}
+
+button.qty-minus {
+  border-right: 1px solid rgb(233, 233, 233);
+}
+
+button.qty-plus {
+  border-left: 1px solid rgb(233, 233, 233);
+}
+
+.item--qty-form {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+button.add-to-cart {
+  cursor: pointer;
+  appearance: none;
+  background-color: var(--button-color);
+  border: none;
+  color: white;
+  font-family: inherit;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+button.add-to-cart:hover {
+  translate: -1px -1px;
+  box-shadow: 1px 1px 8px var(--button-color);
+}
+
+button.add-to-cart:active {
+  translate: 0;
+  box-shadow: none;
+}

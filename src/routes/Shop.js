@@ -2,7 +2,7 @@ import { useOutletContext } from 'react-router-dom';
 import Card from '../components/Card';
 
 export default function Shop() {
-  const [inventory] = useOutletContext();
+  const {inventory} = useOutletContext();
   return (
     <>
       <div className="shop--items-container">

@@ -1,20 +1,24 @@
 import { useState, useRef, useEffect, useLayoutEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import data from '../mallows.js';
+import { useParams, useOutletContext } from 'react-router-dom';
 import randomColor from '../colors';
 import formatDate from '../helpers/formatDate';
 import arrowLeft from '../assets/arrow-left.svg';
 import arrowRight from '../assets/arrow-right.svg';
+import bongo from '../assets/bongo404.png';
 
 export default function Item() {
+  const {inventory, setCart} = useOutletContext();
+
   const params = useParams();
   const { itemId } = params;
-  const mallow = data.find((item) => item.name === itemId);
+  const mallow = inventory.find((item) => item.name === itemId);
 
   const [imageContainerSize, setImageContainerSize] = useState(null);
   const [imgRoll, setImgRoll] = useState(0);
   const [hover, setHover] = useState(false);
   const [nameColor] = useState(randomColor());
+  const [qty, setQty] = useState(1);
+  const [qtyError, setQtyError] = useState(false);
 
   const imageSelectorTracker = useRef(null);
   const imageContainer = useRef(null);
@@ -49,13 +53,52 @@ export default function Item() {
   }, []);
 
   useLayoutEffect(() => {
-    setImageContainerSize(imageContainer.current.clientWidth)
-  }, [])
+    setImageContainerSize(imageContainer.current.clientWidth);
+  }, []);
 
   // adds length * vw to size so more images don't get too small
   const smallImgSize = `calc(${
     (imageContainerSize * 0.35) / mallow.image.length
   }px + ${mallow.image.length}vw)`;
+
+  const displayQtyError = () => {
+    setQtyError(true);
+    setTimeout(() => {
+      setQtyError(false);
+    }, 3000);
+  }
+
+  const handleChange = (e) => {
+    if ((e.target.value <= mallow.stock && e.target.value > 0) || e.target.value === '') {
+      setQty(e.target.value);
+      return
+    }
+    setQty(1);
+    displayQtyError();
+  };
+
+  const decrement = () => {
+    if (qty < 2) return;
+    setQty((prev) => +prev - 1);
+  };
+
+  const increment = () => {
+    if (qty >= mallow.stock) {
+      displayQtyError();
+      return;
+    }
+    setQty((prev) => +prev + 1);
+  };
+
+  const addToCart = () => {
+    setCart(prev => {
+      if (prev.some(item => item.id === mallow.name)) {
+        return prev.map(item => item.id === mallow.name ? {...item, qty: item.qty + qty} : item)
+      }
+      return [...prev, {id: mallow.name, qty: qty}]
+    })
+
+  }
 
   return (
     <div className="item-page--wrapper">
@@ -97,9 +140,7 @@ export default function Item() {
             <div
               ref={imageSelectorTracker}
               style={{
-                maxHeight: hover
-                  ? smallImgSize
-                  : 0,
+                maxHeight: hover ? smallImgSize : 0,
               }}
               className="item--image-selector"
             >
@@ -110,7 +151,7 @@ export default function Item() {
                   style={{
                     width: smallImgSize,
                     maxHeight: '100%',
-                    opacity: imgRoll / -100 === index ? 1 : 0.5
+                    opacity: imgRoll / -100 === index ? 1 : 0.5,
                   }}
                   onClick={() => setImgRoll(index * -100)}
                 />
@@ -145,16 +186,47 @@ export default function Item() {
           {mallow.size && (
             <div className="item--size">
               <p>Size</p>
-              <div>{mallow.size.toString().length < 3 ? `${mallow.size}"` : `${mallow.size}`}</div>
+              <div>
+                {mallow.size.toString().length < 3
+                  ? `${mallow.size}"`
+                  : `${mallow.size}`}
+              </div>
             </div>
           )}
-          <div className='item--price-container'>
-            {mallow.stock > 0 ? <div className='item--in-stock'>In stock</div> : <div className='item--out-of-stock'>Out of stock</div>}
-            <div className='item--price'>{`$${mallow.price}`}</div>
+          <div className="item--price-container">
+            {mallow.stock > 0 ? (
+              <div className="item--in-stock">In stock</div>
+            ) : (
+              <div className="item--out-of-stock">Out of stock</div>
+            )}
+            <div className="item--price">{`$${mallow.price}`}</div>
             {mallow.stock > 0 && (
-              <div className='item--acquisition'>
-                
-
+              <div className="item--acquisition">
+                <form className='item--qty-form'>
+                  <div className="item--qty">
+                    <span
+                      className="qty-error"
+                      style={{ opacity: qtyError ? '0.7' : '0' }}
+                    >
+                      <img src={bongo} alt="bongo!" height="20px" /> Limited
+                      stock available
+                    </span>
+                    <button className='qty-minus' type="button" onClick={decrement}>
+                      -
+                    </button>
+                    <input
+                      onChange={handleChange}
+                      value={qty}
+                      type="number"
+                      min="1"
+                      max={mallow.stock}
+                    />
+                    <button className='qty-plus' type="button" onClick={increment}>
+                      +
+                    </button>
+                  </div>
+                  <button onClick={addToCart} className='add-to-cart' type='button'>ADD TO CART</button>
+                </form>
               </div>
             )}
           </div>
