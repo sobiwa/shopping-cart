@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import mallows from '../mallows.js';
 import logo from '../assets/Logo-min.png';
@@ -7,8 +7,20 @@ import cartIcon from '../assets/Icon-Shopping.svg';
 export default function Root() {
   const navigate = useNavigate();
 
-  const [inventory, setInventory] = useState(mallows);
+  const [inventory, setInventory] = useState(mallows.map(mallow => ({...mallow, runningStock: mallow.stock})));
   const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    cart.forEach((cartItem) => {
+      setInventory((prev) =>
+        prev.map((item) =>
+          item.name === cartItem.product.name
+            ? { ...item, runningStock: item.stock - cartItem.qty }
+            : item
+        )
+      );
+    });
+  }, [cart]);
 
   return (
     <>
@@ -17,16 +29,20 @@ export default function Root() {
           <img src={logo} alt="squishmallow logo" />
         </div>
         <nav>
-          <button className="header--cart-button" type="button">
+          <button
+            className="header--cart-button"
+            type="button"
+            onClick={() => navigate('/cart')}
+          >
             <img src={cartIcon} alt="shopping cart" />
             <div className="header--cart-count">
-              {cart.length ? cart.reduce((a, b) => a + b.qty, 0) : 0}
+              {cart.length ? cart.reduce((a, b) => a + +b.qty, 0) : 0}
             </div>
           </button>
         </nav>
       </header>
       <main>
-        <Outlet context={{inventory, setInventory, cart, setCart}} />
+        <Outlet context={{ inventory, setInventory, cart, setCart }} />
       </main>
     </>
   );

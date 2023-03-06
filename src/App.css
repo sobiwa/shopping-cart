@@ -82,6 +82,7 @@ nav {
 }
 
 .header--cart-button {
+  padding: 0;
   cursor: pointer;
   appearance: none;
   border: none;
@@ -103,7 +104,7 @@ nav {
   justify-content: center;
   border-radius: 50%;
   top: -0.3rem;
-  right: -0.25rem;
+  right: -0.5rem;
   line-height: 100%;
   vertical-align: center;
 }
@@ -463,6 +464,10 @@ main {
   color: #777
 }
 
+.item--qty input[type='number']:focus {
+  outline: none;
+}
+
 /* only working way I could find of removing arrows */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -481,6 +486,7 @@ input::-webkit-inner-spin-button {
   display: flex;
   align-items: center;
   gap: 6px;
+  pointer-events: none;
 }
 
 .item--qty button {
@@ -529,4 +535,301 @@ button.add-to-cart:hover {
 button.add-to-cart:active {
   translate: 0;
   box-shadow: none;
+}
+
+.cart-empty-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+}
+
+.cart-empty-page img {
+  height: 20vh;
+  opacity: 0.2;
+}
+
+.cart-empty-text {
+  font-size: calc(1rem + 3vw);
+  font-weight: 900;
+  margin-bottom: 2vh;
+}
+
+.cart-empty-page button {
+  appearance: none;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  background-color: var(--button-color);
+  font-family: inherit;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.05rem;
+}
+
+.cart-page {
+  padding: 50px 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.cart--details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.cart--items-wrapper {
+  flex: 1 1 50%;
+  container-type: inline-size;
+  container-name: cart;
+}
+
+.cart--items {
+  width: 100%;
+  height: min-content;
+  min-width: 300px;
+}
+
+.cart--totals {
+  flex: 1 1 20%;
+  min-width: 300px;
+}
+
+.cart--item-row {
+  height: 75px;
+  position: relative;
+  transition: 0.5s;
+}
+
+.cart--item-row td {
+  height: 75px;
+  text-align: center;
+}
+
+.cart--item-img {
+  height: 100%;
+}
+
+.cart--remove {
+  position: absolute;
+  inset: 0;
+  margin: auto auto auto 0;
+  height: 25px;
+  width: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.cart--remove:hover {
+  opacity: 0.5;
+}
+
+.cart--remove:active {
+  scale: 0.9;
+}
+
+.cart--remove img {
+  height: 100%;
+  /* width: 100%; */
+}
+
+.cart--remove-column {
+  width: 30px;
+}
+
+.cart-page th {
+  font-size: 0.8rem;
+  font-weight: 900;
+  border-bottom: 2px solid #77777718;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  max-width: 700px;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.item--sub-total {
+  color: var(--button-color);
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 0.1rem;
+}
+
+.cart-page .item--qty {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cart--totals th {
+  border: none;
+  text-align: left;
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+.cart--totals {
+  border: 1px solid #EFEFEF;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.totals-price {
+  color: #777;
+  text-align: right;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.highlight {
+  color: var(--button-color);
+}
+
+.large {
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.cart--totals--data {
+  border-bottom: 1px solid #EFEFEF;
+}
+
+.cart--totals td {
+  padding: 16px 8px;
+}
+
+.cart--totals--heading {
+  font-size: 0.8rem;
+}
+
+.checkout-button {
+  width: 100%;
+  appearance: none;
+  border: none;
+  color: white;
+  background-color: var(--button-color);
+  height: 3rem;
+  border-radius: 30px;
+  font-family: inherit;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.checkout-button:hover {
+  translate: 0 -1px;
+}
+
+.checkout-button:active {
+  translate: 0;
+}
+
+@container cart (max-width: 500px) {
+  .cart-page th {
+    display: none;
+  }
+
+  .cart--remove-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart--remove {
+    height: 20px;
+    position: relative;
+  }
+
+  .cart--item-row {
+    height: min-content;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-left: 115px;
+    margin-bottom: 20px;
+  }
+
+  .cart--item-row .cart--item-img-container {
+    position: absolute;
+    left: 0;
+    width: 100px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cart--item-img {
+    height: 80%;
+  }
+  
+  .cart-page .item--qty {
+    height: 1rem;
+  }
+
+  .item--qty-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .cart--item-row td {
+    height: 1.5rem;
+    font-size: 0.8rem;
+    display: flex;
+  }
+
+  .dash-bottom {
+    border-bottom: 1px dashed rgba(129,129,129,0.2);
+  }
+
+  .item--sub-total {
+    font-size: 0.9rem;
+  }
+
+  .cart--item--price {
+    color: #777;
+  }
+
+  .item--sub-total::before,
+  .item--qty-container::before,
+  .cart--item--price::before {
+    margin: auto auto auto 0;
+    color: #2d2a2a;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 0;
+
+  }
+
+  .cart--item--price::before {
+    content: 'PRICE';
+  }
+
+  .item--qty-container::before {
+    content: 'QUANTITY';
+  }
+
+  .item--sub-total::before {
+    content: 'SUBTOTAL';
+  }
+
+  .cart--item-row .cart--item-name {
+    margin-right: auto;
+    font-size: 1rem;
+  }
 }

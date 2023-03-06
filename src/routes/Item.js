@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useLayoutEffect } from 'react';
-import { useParams, useOutletContext } from 'react-router-dom';
+import { useParams, useOutletContext, useNavigate } from 'react-router-dom';
 import randomColor from '../colors';
 import formatDate from '../helpers/formatDate';
 import arrowLeft from '../assets/arrow-left.svg';
@@ -8,6 +8,8 @@ import bongo from '../assets/bongo404.png';
 
 export default function Item() {
   const {inventory, setCart} = useOutletContext();
+
+  const navigate = useNavigate();
 
   const params = useParams();
   const { itemId } = params;
@@ -69,7 +71,7 @@ export default function Item() {
   }
 
   const handleChange = (e) => {
-    if ((e.target.value <= mallow.stock && e.target.value > 0) || e.target.value === '') {
+    if ((e.target.value <= mallow.runningStock && e.target.value > 0) || e.target.value === '') {
       setQty(e.target.value);
       return
     }
@@ -83,7 +85,7 @@ export default function Item() {
   };
 
   const increment = () => {
-    if (qty >= mallow.stock) {
+    if (qty >= mallow.runningStock) {
       displayQtyError();
       return;
     }
@@ -92,11 +94,12 @@ export default function Item() {
 
   const addToCart = () => {
     setCart(prev => {
-      if (prev.some(item => item.id === mallow.name)) {
-        return prev.map(item => item.id === mallow.name ? {...item, qty: item.qty + qty} : item)
+      if (prev.some(item => item.product.name === mallow.name)) {
+        return prev.map(item => item.product.name === mallow.name ? {...item, qty: item.qty + qty} : item)
       }
-      return [...prev, {id: mallow.name, qty: qty}]
+      return [...prev, {product: mallow, qty: qty}]
     })
+    navigate('/cart');
 
   }
 
@@ -194,13 +197,13 @@ export default function Item() {
             </div>
           )}
           <div className="item--price-container">
-            {mallow.stock > 0 ? (
+            {mallow.runningStock > 0 ? (
               <div className="item--in-stock">In stock</div>
             ) : (
               <div className="item--out-of-stock">Out of stock</div>
             )}
             <div className="item--price">{`$${mallow.price}`}</div>
-            {mallow.stock > 0 && (
+            {mallow.runningStock > 0 && (
               <div className="item--acquisition">
                 <form className='item--qty-form'>
                   <div className="item--qty">
@@ -219,7 +222,7 @@ export default function Item() {
                       value={qty}
                       type="number"
                       min="1"
-                      max={mallow.stock}
+                      max={mallow.runningStock}
                     />
                     <button className='qty-plus' type="button" onClick={increment}>
                       +
