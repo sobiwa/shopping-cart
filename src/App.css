@@ -154,6 +154,7 @@ main {
 .home--image {
   width: var(--home-mallow);
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .home--image img {
@@ -734,6 +735,28 @@ table {
 
 .checkout-button:active {
   translate: 0;
+}
+
+.cart--item-name {
+  cursor: pointer;
+}
+
+.cart--item-img-container {
+  cursor: pointer;
+}
+
+.cart--item-img-container .cart--item-img {
+  transition: 0.3s;
+}
+
+.cart--item-img-container:hover .cart--item-img,
+.cart--item-row:has(.cart--item-name:hover) .cart--item-img{
+  scale: 1.1;
+}
+
+.cart--item-img-container:active .cart--item-img,
+.cart--item-row:has(.cart--item-name:active) .cart--item-img {
+  scale: 1;
 }
 
 @container cart (max-width: 500px) {

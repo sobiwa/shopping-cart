@@ -13,26 +13,37 @@ export default function Home() {
     <div className="home--main">
       <div className="home--squish-container">
         <div className="home--row1">
-          <div className="home--image">
-            <img src={wanda} alt='lovely wanda'/>
+          <div
+            onClick={() => navigate('./items/Wanda')}
+            className="home--image"
+          >
+            <img src={wanda} alt="lovely wanda" />
           </div>
-          <div className="home--image">
-            <img src={steele} alt='Steele'/>
+          <div
+            onClick={() => navigate('./items/Steele')}
+            className="home--image"
+          >
+            <img src={steele} alt="Steele" />
           </div>
         </div>
         <div className="home--row2">
-          <div className="home--image">
-            <img src={fifi} alt='Fifi'/>
+          <div onClick={() => navigate('./items/Fifi')} className="home--image">
+            <img src={fifi} alt="Fifi" />
           </div>
-          <div className="home--image">
-            <img src={wyatt} alt='Wyatt'/>
+          <div
+            onClick={() => navigate('./items/Wyatt')}
+            className="home--image"
+          >
+            <img src={wyatt} alt="Wyatt" />
           </div>
-          <div className="home--image">
-            <img src={lola} alt='lola'/>
+          <div onClick={() => navigate('./items/Lola')} className="home--image">
+            <img src={lola} alt="lola" />
           </div>
         </div>
       </div>
-      <button className='home--shop-link' onClick={() => navigate('/shop')}>Shop All</button>
+      <button className="home--shop-link" onClick={() => navigate('/shop')}>
+        Shop All
+      </button>
     </div>
   );
 }

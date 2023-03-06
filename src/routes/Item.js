@@ -21,6 +21,7 @@ export default function Item() {
   const [nameColor] = useState(randomColor());
   const [qty, setQty] = useState(1);
   const [qtyError, setQtyError] = useState(false);
+  const [tickle, setTickle] = useState(false);
 
   const imageSelectorTracker = useRef(null);
   const imageContainer = useRef(null);
@@ -48,6 +49,14 @@ export default function Item() {
   const windowResize = () => {
     setImageContainerSize(imageContainer.current.clientWidth);
   };
+
+  const animateTickle = () => {
+    setTickle(true);
+    setTimeout(() => {
+      setTickle(false)
+    }, 300);
+
+  }
 
   useEffect(() => {
     window.addEventListener('resize', windowResize);
@@ -117,7 +126,7 @@ export default function Item() {
           <div className="item--image-container">
             <div className="item--image-roll" style={rollPosition}>
               {mallow.image.map((img) => (
-                <img src={img} alt={mallow.name} />
+                <img onClick={animateTickle} className={tickle ? 'alt-effect' : ''} src={img} alt={mallow.name} />
               ))}
             </div>
             {mallow.image.length > 1 && (

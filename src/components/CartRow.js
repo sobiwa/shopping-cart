@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import x from '../assets/x.svg';
 import bongo from '../assets/bongo404.png';
 
@@ -12,6 +13,7 @@ export default function CartRow({
   stock,
   setCart,
 }) {
+  const navigate = useNavigate();
   const [qtyError, setQtyError] = useState(false);
   const [removal, setRemoval] = useState(false);
 
@@ -58,9 +60,17 @@ export default function CartRow({
     );
   };
 
+  const goToItemPage = () => {
+    navigate(`/items/${name}`);
+  };
+
   return (
-    <tr key={name} className="cart--item-row" style={{opacity: removal ? 0.5 : 1}}>
-      <td className='cart--remove-container'>
+    <tr
+      key={name}
+      className="cart--item-row"
+      style={{ opacity: removal ? 0.5 : 1 }}
+    >
+      <td className="cart--remove-container">
         <button
           onMouseEnter={() => setRemoval(true)}
           onMouseLeave={() => setRemoval(false)}
@@ -72,12 +82,14 @@ export default function CartRow({
           <img src={x} alt="remove item" />
         </button>
       </td>
-      <td className='cart--item-img-container'>
+      <td onClick={goToItemPage} className="cart--item-img-container">
         <img className="cart--item-img" src={image} alt={name} />
       </td>
-      <td className='cart--item-name'>{`${name} - ${size.toString().length < 5 ? `${size}"` : 'Combo Pack'}`}</td>
-      <td className='cart--item--price dash-bottom'>{`$${price}`}</td>
-      <td className='item--qty-container dash-bottom'>
+      <td onClick={goToItemPage} className="cart--item-name">{`${name} - ${
+        size.toString().length < 5 ? `${size}"` : 'Combo Pack'
+      }`}</td>
+      <td className="cart--item--price dash-bottom">{`$${price}`}</td>
+      <td className="item--qty-container dash-bottom">
         <form className="item--qty-form">
           <div className="item--qty">
             <span
@@ -103,8 +115,8 @@ export default function CartRow({
           </div>
         </form>
       </td>
-      <td className='item--sub-total'>
-        {`$${Math.round((price * qty) * 100) / 100}`}
+      <td className="item--sub-total">
+        {`$${Math.round(price * qty * 100) / 100}`}
       </td>
     </tr>
   );
