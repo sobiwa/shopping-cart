@@ -7,7 +7,7 @@ export default function Shop() {
     <>
       <div className="shop--items-container">
         {inventory.map((mallow) => (
-          <Card key={mallow.name} name={mallow.name} image={mallow.image} />
+          <Card key={mallow.name} name={mallow.name} image={mallow.image} outOfStock={mallow.runningStock < 1}/>
         ))}
       </div>
     </>

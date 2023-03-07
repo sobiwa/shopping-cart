@@ -66,13 +66,18 @@ body {
   width: 100%;
 }
 header {
+  box-sizing: border-box;
+  position: fixed;
+  width: 100%;
+  opacity: 0.9;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: white;
-  padding: 8px 30px;
-  height: 40px;
+  padding: 0 30px;
+  height: 60px;
   box-shadow: 0px 2px 20px rgb(0 0 0 / 10%);
+  z-index: 3;
 }
 
 nav {
@@ -136,6 +141,7 @@ nav {
 }
 
 main {
+  padding-top: 60px;
   flex: 1 1 auto;
   display: flex;
   justify-content: center;
@@ -143,12 +149,14 @@ main {
 
 .home--main {
   flex: 1 1 100%;
-  background-color: var(--blue);
+  /* background-color: var(--blue); */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+  background: center/ min(90vw, 800px) no-repeat url('./assets/pink-color.png'), var(--blue);
+
 }
 
 .home--image {
@@ -255,6 +263,7 @@ main {
 
 .shop--img-container {
   box-sizing: border-box;
+  position: relative;
   width: 100%;
   padding: 20px;
   display: flex;
@@ -262,8 +271,29 @@ main {
   justify-content: center;
   border-radius: 30px;
 }
+
 .shop--img-container img {
   width: 100%;
+}
+
+.oos-badge {
+  box-sizing: border-box;
+  position: absolute;
+  font-family: 'borsok';
+  color: white;
+  background-color: #777;
+  height: 50px;
+  width: 50px;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  top: -6px;
+  left: -6px;
+  
 }
 
 .shop--name {
@@ -362,7 +392,6 @@ main {
 .item--image-roll{
   display: flex;
   transition: 0.3s;
-  /* translate: -100% 0; */
 }
 
 .item--image-container img {
@@ -376,8 +405,13 @@ main {
   justify-content: center;
 }
 
+.item--image-container:hover .image-button {
+  translate: 0;
+}
+
 .image-button {
   appearance: none;
+  padding: 0;
   border: none;
   background-color: transparent;
   height: 5vh;
@@ -388,16 +422,22 @@ main {
   cursor: pointer;
 }
 
+.image-button img {
+  width: 100%;
+}
+
 .image-button:hover {
   opacity: 1;
 }
 
 .item--image-right {
   right: 0;
+  translate: 6vh;
 }
 
 .item--image-left {
   left: 0;
+  translate: -6vh;
 }
 
 .item--image-selector {
@@ -509,6 +549,12 @@ button.qty-plus {
   border-left: 1px solid rgb(233, 233, 233);
 }
 
+button.qty-plus:hover,
+button.qty-minus:hover {
+  color: var(--button-color);
+
+}
+
 .item--qty-form {
   display: flex;
   gap: 16px;
@@ -597,6 +643,7 @@ button.add-to-cart:active {
 .cart--totals {
   flex: 1 1 20%;
   min-width: 300px;
+  height: min-content;
 }
 
 .cart--item-row {

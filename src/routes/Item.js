@@ -125,8 +125,8 @@ export default function Item() {
         >
           <div className="item--image-container">
             <div className="item--image-roll" style={rollPosition}>
-              {mallow.image.map((img) => (
-                <img onClick={animateTickle} className={tickle ? 'alt-effect' : ''} src={img} alt={mallow.name} />
+              {mallow.image.map((img, index) => (
+                <img key={`image-roll-${index}`} onClick={animateTickle} className={tickle ? 'alt-effect' : ''} src={img} alt={mallow.name} />
               ))}
             </div>
             {mallow.image.length > 1 && (
@@ -158,6 +158,7 @@ export default function Item() {
             >
               {mallow.image.map((pic, index) => (
                 <img
+                  key={index}
                   src={pic}
                   alt={mallow.name}
                   style={{
@@ -227,6 +228,7 @@ export default function Item() {
                       -
                     </button>
                     <input
+                      data-testid='item-qty-input'
                       onChange={handleChange}
                       value={qty}
                       type="number"

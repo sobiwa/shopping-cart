@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import randomColor from '../helpers/colors';
 
-export default function Card({ name, image }) {
+export default function Card({ name, image, outOfStock }) {
   const navigate = useNavigate();
   const [hover, setHover] = useState(false);
   const [bgColor] = useState(randomColor());
@@ -23,6 +23,7 @@ export default function Card({ name, image }) {
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         />
+        {outOfStock && <div className='oos-badge'>SOLD OUT</div>}
       </div>
       <div className="shop--name">{name}</div>
     </div>
