@@ -13,6 +13,8 @@ const renderWithRouter = (ui, { route = '/' } = {}) => {
   };
 };
 
+const mock_addToCart = jest.fn();
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useOutletContext: () => {
@@ -32,6 +34,9 @@ jest.mock('react-router-dom', () => ({
           runningStock: 5,
         },
       ],
+      setCart: () => {
+        mock_addToCart();
+      },
     };
   },
   useParams: () => ({ itemId: 'Wyatt' }),
@@ -92,7 +97,13 @@ describe('<Item />', () => {
     await user.click(incrementBtn);
     await waitFor(() => {
       expect(screen.queryByText('Limited stock available')).not.toBeVisible();
-    }, {timeout: 3000})
+    }, {timeout: 3100})
+  })
+
+  test('adds to cart', async () => {
+    const {user} = renderWithRouter(<Item />, { route: '/items' });
+    await user.click(screen.getByText('ADD TO CART'))
+    expect(mock_addToCart).toBeCalled();
   })
 });
 

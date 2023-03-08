@@ -1,11 +1,13 @@
-import { useOutletContext, useNavigate } from 'react-router-dom';
+import { useOutletContext, useNavigate, Link } from 'react-router-dom';
 import cartIcon from '../assets/cart.svg';
+import checkIcon from '../assets/check.svg';
 import CartRow from '../components/CartRow';
 import roundTo2 from '../helpers/roundTo2';
 
 export default function Cart() {
-  const { cart, setCart, inventory, setInventory } = useOutletContext();
+  const { cart, setCart, setInventory } = useOutletContext();
   const navigate = useNavigate();
+
   const subTotal = cart.reduce(
     (acc, curr) =>
       Math.round((acc + curr.qty * curr.product.price) * 100) / 100,
@@ -33,6 +35,17 @@ export default function Cart() {
     <div className="cart-page">
       {cart.length ? (
         <div className="cart--details">
+          {cart.some((item) => item.newlyAdded) && (
+            <div className="cart--item-added">
+              <div className="cart--item-added-confirmation">
+                <img src={checkIcon} alt="item added to cart" />
+                {`"${
+                  cart.find((item) => item.newlyAdded).product.name
+                }" has been added to your cart.`}
+              </div>
+              <Link to="/shop">CONTINUE SHOPPING</Link>
+            </div>
+          )}
           <div class="cart--items-wrapper">
             <table className="cart--items">
               <thead>
@@ -96,7 +109,13 @@ export default function Cart() {
                 </tr>
               </thead>
             </table>
-            <button className="checkout-button" type="button">
+            <button
+              onClick={() => {
+                window.open('https://squishmallows.com/', '_blank').focus();
+              }}
+              className="checkout-button"
+              type="button"
+            >
               PROCEED TO CHECKOUT
             </button>
           </div>
@@ -105,7 +124,11 @@ export default function Cart() {
         <div className="cart-empty-page">
           <img src={cartIcon} alt="cart empty" />
           <div className="cart-empty-text">Your cart is currently empty</div>
-          <button type="button" onClick={() => navigate('/shop')}>
+          <button
+            className="return-to-shop-button"
+            type="button"
+            onClick={() => navigate('/shop')}
+          >
             RETURN TO SHOP
           </button>
         </div>

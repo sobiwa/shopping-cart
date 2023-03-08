@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 
 import fifi from '../assets/premium/fifi.png';
 import lola from '../assets/premium/lola.png';
@@ -8,6 +9,11 @@ import steele from '../assets/premium/steele.png';
 
 export default function Home() {
   const navigate = useNavigate();
+  const { setCart } = useOutletContext();
+
+  useEffect(() => {
+    setCart((prev) => prev.map((item) => ({ ...item, newlyAdded: false })));
+  }, []);
 
   return (
     <div className="home--main">

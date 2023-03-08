@@ -7,7 +7,7 @@ import arrowRight from '../assets/arrow-right.svg';
 import bongo from '../assets/bongo404.png';
 
 export default function Item() {
-  const {inventory, setCart} = useOutletContext();
+  const { inventory, setCart } = useOutletContext();
 
   const navigate = useNavigate();
 
@@ -53,10 +53,9 @@ export default function Item() {
   const animateTickle = () => {
     setTickle(true);
     setTimeout(() => {
-      setTickle(false)
+      setTickle(false);
     }, 300);
-
-  }
+  };
 
   useEffect(() => {
     window.addEventListener('resize', windowResize);
@@ -77,12 +76,15 @@ export default function Item() {
     setTimeout(() => {
       setQtyError(false);
     }, 3000);
-  }
+  };
 
   const handleChange = (e) => {
-    if ((e.target.value <= mallow.runningStock && e.target.value > 0) || e.target.value === '') {
+    if (
+      (e.target.value <= mallow.runningStock && e.target.value > 0) ||
+      e.target.value === ''
+    ) {
       setQty(e.target.value);
-      return
+      return;
     }
     setQty(1);
     displayQtyError();
@@ -102,15 +104,18 @@ export default function Item() {
   };
 
   const addToCart = () => {
-    setCart(prev => {
-      if (prev.some(item => item.product.name === mallow.name)) {
-        return prev.map(item => item.product.name === mallow.name ? {...item, qty: item.qty + qty} : item)
+    setCart((prev) => {
+      if (prev.some((item) => item.product.name === mallow.name)) {
+        return prev.map((item) =>
+          item.product.name === mallow.name
+            ? { ...item, qty: item.qty + qty }
+            : item
+        );
       }
-      return [...prev, {product: mallow, qty: qty}]
-    })
+      return [...prev, { product: mallow, qty: qty, newlyAdded: true }];
+    });
     navigate('/cart');
-
-  }
+  };
 
   return (
     <div className="item-page--wrapper">
@@ -126,7 +131,13 @@ export default function Item() {
           <div className="item--image-container">
             <div className="item--image-roll" style={rollPosition}>
               {mallow.image.map((img, index) => (
-                <img key={`image-roll-${index}`} onClick={animateTickle} className={tickle ? 'alt-effect' : ''} src={img} alt={mallow.name} />
+                <img
+                  key={`image-roll-${index}`}
+                  onClick={animateTickle}
+                  className={tickle ? 'alt-effect' : ''}
+                  src={img}
+                  alt={mallow.name}
+                />
               ))}
             </div>
             {mallow.image.length > 1 && (
@@ -215,7 +226,7 @@ export default function Item() {
             <div className="item--price">{`$${mallow.price}`}</div>
             {mallow.runningStock > 0 && (
               <div className="item--acquisition">
-                <form className='item--qty-form'>
+                <form className="item--qty-form">
                   <div className="item--qty">
                     <span
                       className="qty-error"
@@ -224,22 +235,34 @@ export default function Item() {
                       <img src={bongo} alt="bongo!" height="20px" /> Limited
                       stock available
                     </span>
-                    <button className='qty-minus' type="button" onClick={decrement}>
-                      -
-                    </button>
                     <input
-                      data-testid='item-qty-input'
+                      type="button"
+                      value="-"
+                      className="qty-minus"
+                      onClick={decrement}
+                    />
+                    <input
+                      data-testid="item-qty-input"
                       onChange={handleChange}
                       value={qty}
                       type="number"
                       min="1"
                       max={mallow.runningStock}
                     />
-                    <button className='qty-plus' type="button" onClick={increment}>
-                      +
-                    </button>
+                    <input
+                      type="button"
+                      value='+'
+                      className="qty-plus"
+                      onClick={increment}
+                    />
                   </div>
-                  <button onClick={addToCart} className='add-to-cart' type='button'>ADD TO CART</button>
+                  <button
+                    onClick={addToCart}
+                    className="add-to-cart"
+                    type="button"
+                  >
+                    ADD TO CART
+                  </button>
                 </form>
               </div>
             )}

@@ -91,17 +91,20 @@ export default function CartRow({
       <td className="cart--item--price dash-bottom">{`$${price}`}</td>
       <td className="item--qty-container dash-bottom">
         <form className="item--qty-form">
+          <span
+            className="qty-error"
+            style={{ opacity: qtyError ? '0.7' : '0' }}
+          >
+            <img src={bongo} alt="bongo!" height="20px" /> Limited stock
+            available
+          </span>
           <div className="item--qty">
-            <span
-              className="qty-error"
-              style={{ opacity: qtyError ? '0.7' : '0' }}
-            >
-              <img src={bongo} alt="bongo!" height="20px" /> Limited stock
-              available
-            </span>
-            <button className="qty-minus" type="button" onClick={decrement}>
-              -
-            </button>
+            <input
+              type="button"
+              value="-"
+              className="qty-minus"
+              onClick={decrement}
+            />
             <input
               onChange={handleChange}
               value={qty}
@@ -109,9 +112,12 @@ export default function CartRow({
               min="1"
               max={stock}
             />
-            <button className="qty-plus" type="button" onClick={increment}>
-              +
-            </button>
+            <input
+              type="button"
+              value="+"
+              className="qty-plus"
+              onClick={increment}
+            />
           </div>
         </form>
       </td>
