@@ -78,10 +78,10 @@ header {
   box-sizing: border-box;
   position: fixed;
   width: 100%;
-  opacity: 0.9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  opacity: 0.95;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-content: center;
   background-color: white;
   padding: 0 30px;
   height: 60px;
@@ -91,8 +91,15 @@ header {
 
 nav {
   display: flex;
+  gap: 5vw;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+}
+
+.header--cart {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .header--cart-button {
@@ -126,7 +133,7 @@ nav {
 }
 
 .logo {
-  z-index: 10;
+  z-index: 3;
   height: 75px;
   width: min-content;
   transition: 0.3s;
@@ -145,6 +152,21 @@ nav {
 .logo img {
   height: 100%;
   width: auto;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #1d1f28;
+  transition: 0.3s;
+}
+
+.nav-link:hover {
+  scale: 1.1;
+}
+
+.nav-link.active {
+  color: var(--button-color);
 }
 
 main {
@@ -268,6 +290,12 @@ main {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  color:#1d1f28;
+  transition: 0.3s;
+}
+
+.shop--card:hover {
+  color:hsl(229, 16%, 50%);
 }
 
 .shop--img-container {
@@ -597,7 +625,8 @@ button.add-to-cart:active {
   box-shadow: none;
 }
 
-.cart-empty-page {
+.cart-empty-page,
+.cart-empty-slide {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -606,7 +635,7 @@ button.add-to-cart:active {
   height: 100%;
 }
 
-.cart-empty-page img {
+.cart-empty-icon {
   height: 20vh;
   opacity: 0.2;
 }
@@ -615,6 +644,10 @@ button.add-to-cart:active {
   font-size: calc(1rem + 3vw);
   font-weight: 900;
   margin-bottom: 2vh;
+}
+
+.cart-empty-slide .cart-empty-text {
+  font-size: 25px;
 }
 
 .return-to-shop-button {

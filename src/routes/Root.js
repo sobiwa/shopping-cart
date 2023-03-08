@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, NavLink } from 'react-router-dom';
 import logo from '../assets/Logo-min.png';
 import cartIcon from '../assets/Icon-Shopping.svg';
 import CartSlide from '../components/CartSlide.js';
@@ -37,6 +37,14 @@ export default function Root() {
           <img src={logo} alt="squishmallow logo" />
         </div>
         <nav>
+          <NavLink to='/' className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>
+            Home
+          </NavLink>
+          <NavLink to='/shop' className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}>Shop</NavLink>
+
+
+        </nav>
+        <div className='header--cart'>
           <button
             className="header--cart-button"
             type="button"
@@ -47,7 +55,7 @@ export default function Root() {
               {cart.length ? cart.reduce((a, b) => a + +b.qty, 0) : 0}
             </div>
           </button>
-        </nav>
+        </div>
       </header>
       <main>
         <Outlet context={{ inventory, setInventory, cart, setCart }} />

@@ -122,7 +122,7 @@ export default function Cart() {
         </div>
       ) : (
         <div className="cart-empty-page">
-          <img src={cartIcon} alt="cart empty" />
+          <img className='cart-empty-icon' src={cartIcon} alt="cart empty" />
           <div className="cart-empty-text">Your cart is currently empty</div>
           <button
             className="return-to-shop-button"
