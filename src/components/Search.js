@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import searchIcon from '../assets/search.svg';
 
-export default function Search({ stock, exit, isOpen }) {
+export default function Search({ stock, exit, isOpen, focusAuto = false }) {
   const [input, setInput] = useState('');
   const [matchers, setMatchers] = useState([]);
+  const searchInput = useRef();
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -23,6 +24,9 @@ export default function Search({ stock, exit, isOpen }) {
 
   useEffect(() => {
     setInput('');
+    if (focusAuto && isOpen) {
+      searchInput.current.focus();
+    }
   }, [isOpen]);
 
   return (
@@ -33,8 +37,14 @@ export default function Search({ stock, exit, isOpen }) {
           placeholder="Search for products"
           value={input}
           onChange={handleChange}
+          ref={searchInput}
         />
-        <img className="search--icon" alt="search" src={searchIcon} />
+        <img
+          style={{ display: input === '' ? 'block' : 'none' }}
+          className="search--icon"
+          alt="search"
+          src={searchIcon}
+        />
       </div>
 
       <ul className="search--results">
@@ -43,7 +53,7 @@ export default function Search({ stock, exit, isOpen }) {
             matchers.map((item) => (
               <li>
                 <Link to={`items/${item.name}`} onClick={exit}>
-                  <img height="50px" src={item.image[0]} alt={item.name} />
+                  <img src={item.image[0]} alt={item.name} />
                   <span>{item.name}</span>
                 </Link>
               </li>

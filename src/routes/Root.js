@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Outlet, useNavigate, NavLink } from 'react-router-dom';
+import { Outlet, useNavigate, NavLink, useLocation } from 'react-router-dom';
 import logo from '../assets/Logo-min.png';
 import cartIcon from '../assets/Icon-Shopping.svg';
 import dropIcon from '../assets/menu.svg';
+import searchIcon2 from '../assets/search2.svg';
 import CartSlide from '../components/CartSlide.js';
 import ScrollToTop from '../components/ScrollToTop';
 import mallows from '../mallows.js';
 import NavSlide from '../components/NavSlide';
+import SearchSlide from '../components/SearchSlide';
 
 export default function Root() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const [inventory, setInventory] = useState(
     mallows.map((mallow) => ({ ...mallow, runningStock: mallow.stock }))
@@ -30,20 +33,22 @@ export default function Root() {
 
   const [showCartSlide, setShowCartSlide] = useState(false);
   const [showNavSlide, setShowNavSlide] = useState(false);
+  const [showSearchSlide, setShowSearchSlide] = useState(false);
 
   return (
     <>
       <ScrollToTop />
       <div
+        className="fade-screen"
         onClick={() => {
           setShowCartSlide(false);
           setShowNavSlide(false);
+          setShowSearchSlide(false);
         }}
-        className="fade-screen"
         style={{
           transition: '0.3s',
-          pointerEvents: showCartSlide || showNavSlide ? 'all' : 'none',
-          opacity: showCartSlide || showNavSlide ? '0.3' : '0',
+          pointerEvents: showCartSlide || showNavSlide || showSearchSlide ? 'all' : 'none',
+          opacity: showCartSlide || showNavSlide || showSearchSlide ? '0.3' : '0',
         }}
       ></div>
       <header>
@@ -64,12 +69,24 @@ export default function Root() {
             Shop
           </NavLink>
         </nav>
-        <div class="header--alt-nav">
+        <div className="header--alt-nav">
+        <div className="header--search">
+            <button
+              className="header--search-button"
+              type="button"
+              onClick={() => setShowSearchSlide(true)}
+              >
+                <img src={searchIcon2} alt="search"/>
+              </button>
+          </div>
           <div className="header--cart">
             <button
               className="header--cart-button"
               type="button"
-              onClick={() => setShowCartSlide(true)}
+              onClick={() => {
+                if (pathname === '/cart') return;
+                setShowCartSlide(true);
+              }}
             >
               <img src={cartIcon} alt="shopping cart" />
               <div className="header--cart-count">
@@ -97,7 +114,16 @@ export default function Root() {
         cart={cart}
         setCart={setCart}
       />
-      <NavSlide showNavSlide={showNavSlide} setShowNavSlide={setShowNavSlide} stock={inventory} />
+      <NavSlide
+        showNavSlide={showNavSlide}
+        setShowNavSlide={setShowNavSlide}
+        stock={inventory}
+      />
+      <SearchSlide
+        show={showSearchSlide}
+        setShow={setShowSearchSlide}
+        stock={inventory}
+      />
     </>
   );
 }
