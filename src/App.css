@@ -23,7 +23,7 @@
   --orange: rgb(255 163 0 / 50%);
   --pink: rgb(255 50 172 / 33%);
   --gray: #EFEFEF;
-  --button-color: rgb(8 204 218);
+  --button-color: #08ccda;
 
   --home-mallow: min(250px, 40vw);
 }
@@ -1038,7 +1038,7 @@ table {
 .nav-slide ul {
   list-style: none;
   padding: 0;
-  margin: 60px 0;
+  margin: 0;
 }
 
 .nav-slide li {
@@ -1191,11 +1191,65 @@ button img {
 .fade-screen {
   position: fixed;
   background-color: black;
-  /* animation-name: fade;
-  animation-duration: 0.3s;
-  animation-fill-mode: both; */
   inset: 0;
   z-index: 4;
+}
+
+.search--container {
+  margin-top: 60px;
+  position: relative;
+}
+
+.search--icon {
+  position: absolute;
+  inset: 0;
+  margin: auto 16px auto auto;
+  height: 30px;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.search--container input {
+  appearance: none;
+  border: none;
+  font-family: inherit;
+  background-color: hsl(0, 0%, 98%);
+  box-shadow: 0 1px 10px rgb(231, 230, 230);
+  width: 100%;
+  padding: 25px 20px;
+}
+
+.search--container:has(input:focus) .search--icon {
+  opacity: 0;
+}
+
+.search--container input:focus {
+  outline: 0.5px solid var(--button-color);
+
+}
+
+.nav-slide .search--container input {
+  font-size: 1rem;
+
+}
+
+.nav-slide .search--results {
+  max-height: 50vh;
+  overflow: scroll;
+  box-shadow: 0 0.5px 5px rgb(243, 243, 243);
+}
+
+.nav-slide .search--results li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color:#1d1f28;
+}
+
+.search--results {
+  padding: 0;
+  margin: 0;
 }
 
 @media only screen and (max-width: 800px) {

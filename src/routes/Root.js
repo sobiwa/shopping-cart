@@ -97,7 +97,7 @@ export default function Root() {
         cart={cart}
         setCart={setCart}
       />
-      <NavSlide showNavSlide={showNavSlide} setShowNavSlide={setShowNavSlide} />
+      <NavSlide showNavSlide={showNavSlide} setShowNavSlide={setShowNavSlide} stock={inventory} />
     </>
   );
 }
