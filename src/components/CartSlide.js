@@ -4,18 +4,18 @@ import cartIcon from '../assets/cart.svg';
 import { useNavigate } from 'react-router-dom';
 
 export default function CartSlide({
-  showSlideCart,
-  setShowSlideCart,
+  showCartSlide,
+  setShowCartSlide,
   cart,
   setCart,
 }) {
   const navigate = useNavigate();
   return (
-    <div className={`cart-slide ${showSlideCart ? 'slide-in' : ''}`}>
+    <div className={`cart-slide ${showCartSlide ? 'slide-in' : ''}`}>
       <button
         className="cart-slide--close"
         type="button"
-        onClick={() => setShowSlideCart(false)}
+        onClick={() => setShowCartSlide(false)}
       >
         <img src={x} alt="close widget" />
       </button>
@@ -81,7 +81,7 @@ export default function CartSlide({
                 type="button"
                 onClick={() => {
                   navigate('/cart');
-                  setShowSlideCart(false);
+                  setShowCartSlide(false);
                 }}
               >
                 VIEW CART
@@ -106,7 +106,7 @@ export default function CartSlide({
             type="button"
             onClick={() => {
               navigate('/shop');
-              setShowSlideCart(false);
+              setShowCartSlide(false);
             }}
           >
             RETURN TO SHOP
