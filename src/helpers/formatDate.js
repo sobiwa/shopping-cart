@@ -1,3 +1,3 @@
 export default function formatDate(date) {
-  return `${date.getMonth() + 1}.${date.getDay()}.${date.getFullYear()}`
+  return `${date.getUTCMonth() + 1}.${date.getUTCDate()}.${date.getUTCFullYear()}`
 }

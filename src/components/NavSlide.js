@@ -14,7 +14,7 @@ export default function NavSlide({ showNavSlide, setShowNavSlide, stock }) {
         <img src={x} alt="close widget" />
       </button>
       <ul>
-        <li>
+        <li className='nav-link-container'>
           <NavLink
             onClick={() => setShowNavSlide(false)}
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
@@ -23,7 +23,7 @@ export default function NavSlide({ showNavSlide, setShowNavSlide, stock }) {
             HOME
           </NavLink>
         </li>
-        <li>
+        <li className='nav-link-container'>
           <NavLink
             onClick={() => setShowNavSlide(false)}
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
