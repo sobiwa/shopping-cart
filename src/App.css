@@ -215,6 +215,28 @@ main {
   justify-content: center;
 }
 
+@keyframes spin {
+  from {
+    rotate: 0deg;
+  }
+  to {
+    rotate: 360deg;
+  }
+}
+
+.load-squish {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  inset: 0;
+  margin: auto;
+  animation: spin 2s linear infinite;
+}
+
+.load-squish img {
+  width: 100%;
+}
+
 .home--main {
   flex: 1 1 100%;
   /* background-color: var(--blue); */
@@ -224,7 +246,6 @@ main {
   justify-content: center;
   position: relative;
   background: center/ min(90vw, 800px) no-repeat url('./assets/pink-color.png'), var(--blue);
-
 }
 
 .home--image {

@@ -6,6 +6,8 @@ import lola from '../assets/premium/lola.png';
 import wyatt from '../assets/premium/wyatt.png';
 import wanda from '../assets/premium/wanda.png';
 import steele from '../assets/premium/steele.png';
+import loadingSquish from '../assets/loading.png';
+
 
 export default function Home() {
   const navigate = useNavigate();
@@ -37,6 +39,7 @@ export default function Home() {
   return (
     <div className="home--main">
       <div className="home--squish-container">
+        {imagesLoaded.some((item) => !item.loaded) && <div className='load-squish'><img src={loadingSquish} alt='loading'/></div>}
         <div className="home--row1">
           <div
             onClick={() => navigate('./items/Wanda')}

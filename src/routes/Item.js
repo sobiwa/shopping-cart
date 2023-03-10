@@ -54,7 +54,7 @@ export default function Item() {
     setTickle(true);
     setTimeout(() => {
       setTickle(false);
-    }, 300);
+    }, 350);
   };
 
   useEffect(() => {
