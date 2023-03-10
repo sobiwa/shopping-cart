@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useOutletContext } from 'react-router-dom';
 
 import fifi from '../assets/premium/fifi.png';
@@ -10,6 +10,25 @@ import steele from '../assets/premium/steele.png';
 export default function Home() {
   const navigate = useNavigate();
   const { setCart } = useOutletContext();
+  const [imagesLoaded, setImagesLoaded] = useState([
+    { name: 'fifi', loaded: false },
+    { name: 'lola', loaded: false },
+    { name: 'wyatt', loaded: false },
+    { name: 'wanda', loaded: false },
+    { name: 'steele', loaded: false },
+  ]);
+
+  const styles = imagesLoaded.every((item) => item.loaded)
+    ? { opacity: 1 }
+    : { opacity: 0 };
+
+  const changeLoadStatus = (name) => {
+    setImagesLoaded((prev) =>
+      prev.map((item) =>
+        item.name === name ? { ...item, loaded: true } : item
+      )
+    );
+  };
 
   useEffect(() => {
     setCart((prev) => prev.map((item) => ({ ...item, newlyAdded: false })));
@@ -23,31 +42,56 @@ export default function Home() {
             onClick={() => navigate('./items/Wanda')}
             className="home--image"
           >
-            <img src={wanda} alt="lovely wanda" />
+            <img
+              style={styles}
+              onLoad={() => changeLoadStatus('wanda')}
+              src={wanda}
+              alt="lovely wanda"
+            />
           </div>
           <div
             onClick={() => navigate('./items/Steele')}
             className="home--image"
           >
-            <img src={steele} alt="Steele" />
+            <img
+              style={styles}
+              onLoad={() => changeLoadStatus('steele')}
+              src={steele}
+              alt="Steele"
+            />
           </div>
         </div>
         <div className="home--row2">
           <div onClick={() => navigate('./items/Fifi')} className="home--image">
-            <img src={fifi} alt="Fifi" />
+            <img
+              style={styles}
+              onLoad={() => changeLoadStatus('fifi')}
+              src={fifi}
+              alt="Fifi"
+            />
           </div>
           <div
             onClick={() => navigate('./items/Wyatt')}
             className="home--image"
           >
-            <img src={wyatt} alt="Wyatt" />
+            <img
+              style={styles}
+              onLoad={() => changeLoadStatus('wyatt')}
+              src={wyatt}
+              alt="Wyatt"
+            />
           </div>
           <div onClick={() => navigate('./items/Lola')} className="home--image">
-            <img src={lola} alt="lola" />
+            <img
+              style={styles}
+              onLoad={() => changeLoadStatus('lola')}
+              src={lola}
+              alt="lola"
+            />
           </div>
         </div>
       </div>
-      <button className="home--shop-link" onClick={() => navigate('/shop')}>
+      <button style={styles} className="home--shop-link" onClick={() => navigate('/shop')}>
         Shop All
       </button>
     </div>
