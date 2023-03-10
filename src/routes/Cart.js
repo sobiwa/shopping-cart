@@ -46,7 +46,7 @@ export default function Cart() {
               <Link to="/shop">CONTINUE SHOPPING</Link>
             </div>
           )}
-          <div class="cart--items-wrapper">
+          <div className="cart--items-wrapper">
             <table className="cart--items">
               <thead>
                 <tr>
@@ -63,6 +63,7 @@ export default function Cart() {
                   const { name, size, image, price, stock } = item.product;
                   return (
                     <CartRow
+                      key={name}
                       name={name}
                       removeItem={() => removeItem(item)}
                       size={size}
