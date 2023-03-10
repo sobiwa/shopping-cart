@@ -6,11 +6,12 @@ import Error from './routes/Error';
 import Item from './routes/Item';
 import Cart from './routes/Cart';
 import {
+  createHashRouter,
   createBrowserRouter,
   RouterProvider,
 } from 'react-router-dom';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <Root />,
