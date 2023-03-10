@@ -24,7 +24,7 @@ export default function CartSlide({
         <>
           <div className="cart-slide--items">
             {cart.map((item) => (
-              <div className="cart-slide--item">
+              <div key={item.product.name} className="cart-slide--item">
                 <img
                   src={item.product.image[0]}
                   alt={item.product.name}
@@ -98,8 +98,8 @@ export default function CartSlide({
           </div>
         </>
       ) : (
-        <div className='cart-empty-slide'>
-          <img className='cart-empty-icon' src={cartIcon} alt="cart empty" />
+        <div className="cart-empty-slide">
+          <img className="cart-empty-icon" src={cartIcon} alt="cart empty" />
           <div className="cart-empty-text">Your cart is currently empty</div>
           <button
             className="return-to-shop-button"

@@ -11,22 +11,25 @@ export default function Card({ name, image, outOfStock }) {
 
   return (
     <div className="shop--card" onClick={() => navigate(`/items/${name}`)}>
-      <div
-        className="shop--img-container"
-        style={{
-          backgroundColor: bgColor,
-        }}
-      >
-        <img
-          onLoad={() => setLoaded(true)}
-          style={{ /* opacity: loaded ? '1' : '0' */
-        translate: loaded ? '0' : '0 -100%' }}
-          className={hover ? 'alt-effect' : ''}
-          src={imgSrc}
-          alt={name}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-        />
+      <div className="shop--img-wrapper">
+        <div
+          className="shop--img-container"
+          style={{
+            backgroundColor: bgColor,
+          }}
+        >
+          <img
+            onLoad={() => setLoaded(true)}
+            style={{
+              translate: loaded ? '0' : '0 -100%',
+            }}
+            className={hover ? 'alt-effect' : ''}
+            src={imgSrc}
+            alt={name}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+          />
+        </div>
         {outOfStock && <div className="oos-badge">SOLD OUT</div>}
       </div>
       <div className="shop--name">{name}</div>

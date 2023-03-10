@@ -342,6 +342,12 @@ main {
   overflow: hidden;
 }
 
+.shop--img-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+}
+
 .shop--img-container img {
   width: 100%;
   transition: 0.3s;
@@ -604,6 +610,7 @@ input::-webkit-inner-spin-button {
 .item--qty input[type='button'] {
   appearance: none;
   border: none;
+  border-radius: 0;
   box-sizing: border-box;
   width: 25px;
   background-color: transparent;
@@ -1063,7 +1070,7 @@ table {
 
 .cart-slide {
   padding: 50px;
-  width: 300px;
+  width: min(300px, 100vw);
   display: grid;
   grid-template-rows: 3rem 50vh 1fr;
 }

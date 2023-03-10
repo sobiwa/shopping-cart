@@ -51,7 +51,7 @@ export default function Search({ stock, exit, isOpen, focusAuto = false }) {
         {input !== '' &&
           (matchers.length > 0 ? (
             matchers.map((item) => (
-              <li>
+              <li key={item.name}>
                 <Link to={`items/${item.name}`} onClick={exit}>
                   <img src={item.image[0]} alt={item.name} />
                   <span>{item.name}</span>
