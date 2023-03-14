@@ -4,30 +4,22 @@ import searchIcon from '../assets/search.svg';
 
 export default function Search({ stock, exit, isOpen, focusAuto = false }) {
   const [input, setInput] = useState('');
-  const [matchers, setMatchers] = useState([]);
   const searchInput = useRef();
+  const re = new RegExp(input, 'i');
+  const matchers =
+    input === ''
+      ? []
+      : stock.filter((item) => re.test(item.name) || re.test(item.description));
 
   const handleChange = (e) => {
     setInput(e.target.value);
   };
 
   useEffect(() => {
-    if (input === '') {
-      setMatchers([]);
-      return;
-    }
-    const re = new RegExp(input, 'i');
-    setMatchers(
-      stock.filter((item) => re.test(item.name) || re.test(item.description))
-    );
-  }, [input]);
-
-  useEffect(() => {
-    setInput('');
     if (focusAuto && isOpen) {
       searchInput.current.focus();
     }
-  }, [isOpen]);
+  }, [isOpen, focusAuto]);
 
   return (
     <div className="search--container">
@@ -52,7 +44,13 @@ export default function Search({ stock, exit, isOpen, focusAuto = false }) {
           (matchers.length > 0 ? (
             matchers.map((item) => (
               <li key={item.name}>
-                <Link to={`items/${item.name}`} onClick={exit}>
+                <Link
+                  to={`items/${item.name}`}
+                  onClick={() => {
+                    exit();
+                    setInput('');
+                  }}
+                >
                   <img src={item.image[0]} alt={item.name} />
                   <span>{item.name}</span>
                 </Link>
